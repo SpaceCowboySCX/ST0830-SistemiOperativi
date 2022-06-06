@@ -6,7 +6,7 @@
 
 Group project "DekketScris"
 * Simone Cisca, as, SpaceCowboyS01
-* Patryk Sebastian Bialowàs, as, [@MrEntity303](https://github.com/MrEntity303)
+* Patryk Sebastian Bialowas, as, [@MrEntity303](https://github.com/MrEntity303)
 
 ### Objectives
 Develop an application for Linux environment, specifically the tests will be performed on Ubuntu 20.04.4 LTS   <br>
