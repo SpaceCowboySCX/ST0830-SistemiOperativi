@@ -5,6 +5,7 @@
 
 #define MAX_PATH 200
 
+//TODO
 /**
  * This method explain the command for the line command interface.
  */
@@ -17,6 +18,7 @@ void help(){
     return;
 };
 
+//TODO
 /**
  * This method change the current directory to the one passed by param.
  * @param PATH
@@ -30,6 +32,7 @@ int changeDirectory(const char *PATH){
     return chdir(PATH);
 }
 
+//TODO
 /**
  * This method terminate the program execution.
  */
@@ -37,6 +40,7 @@ void terminate(){
     _Exit(0);
 }
 
+//TODO
 /**
  * This method create a new txt file in the current directory.
  */
@@ -44,6 +48,7 @@ void createTXT(){
 
 }
 
+//TODO
 /**
  * This method update a TXT file in the current directory.
  * @param TXT
@@ -52,6 +57,7 @@ void updateTXT(FILE *TXT){
 
 }
 
+//TODO
 /**
  * This method return the current path.
  * @return
