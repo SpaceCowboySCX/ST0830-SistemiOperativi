@@ -19,6 +19,13 @@ Develop an application for Linux environment, specifically the tests will be per
    3. *communication*
    4. *signals*
 
-The project we have chosen has steganography.<br>
-The objective of the exam is not to develop an efficient steganography algorithm,
-but to demonstrate that we know how to use what we have studied during the lessons.
+##Introduction
+Steganography makes invisible communication.
+There are various forms of steganography, among them: injective, generative, substitutive, selective and
+constructive.
+We will use injective steganography.
+This project will fragment the text file into Bytes to then be able to manipulate the image.
+
+##Tutorial
+
+##Documents
