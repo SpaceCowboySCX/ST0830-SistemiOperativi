@@ -1,8 +1,8 @@
 #ifndef ST0830_O_S_PROJECT_COMMANDLIST_H
-#define ST0830_O_S_PROJECT_COMMANDLIST_H
+    #define ST0830_O_S_PROJECT_COMMANDLIST_H
 
-#include <stdio.h>
-#include <stdbool.h>
+    #include <stdio.h>
+
     /**
      * This method explain the command for the line command interface.
      */
@@ -28,22 +28,11 @@
      * This method update a TXT file in the current directory.
      * @param TXT
      */
-    void updateTXT(FILE *TXT);
-
-    /*
-        /**
-         * Y for yes = true = 1
-         * N for no = false = 0
-         * @param choise
-         * @return
-         *
-        bool choise(char choise);
-    */
+    void updateTXT(const char *txtName);
 
     /**
      * This method return the current path.
      * @return
      */
     const char currentPath();
-
 #endif //ST0830_O_S_PROJECT_COMMANDLIST_H

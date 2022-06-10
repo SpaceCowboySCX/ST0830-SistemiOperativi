@@ -10,15 +10,15 @@
  * This method explain the command for the line command interface.
  */
 void help(){
-    printf("/changeDirectory:\tChange the current directory to the one passed by param.\n");
-    printf("/terminate:\tTerminate the program execution.\n");
-    printf("/createTXT:\tCreate a new txt file in the current directory.\n");
-    printf("/updateTXT:\tUpdate a TXT file in the current directory.\n");
-    printf("/currentPath:\tShow the path of current directory.\n");
-    return;
-};
 
-//TODO
+    printf("Type 1) currentPath:\tShow the path of current directory.\n");
+    printf("Type 2) showContent:\tShow the content of current directory.\n");
+    printf("Type 3) changeDirectory:\tChange the current directory to the one passed by param.\n");
+    printf("Type 4) createTXT:\tCreate a new txt file in the current directory.\n");
+    printf("Type 5) updateTXT:\tUpdate a TXT file in the current directory.\n");
+    printf("Type 0) terminate:\tTerminate the program execution.\n");
+}
+
 /**
  * This method change the current directory to the one passed by param.
  * @param PATH
@@ -32,7 +32,6 @@ int changeDirectory(const char *PATH){
     return chdir(PATH);
 }
 
-//TODO
 /**
  * This method terminate the program execution.
  */
@@ -40,20 +39,22 @@ void terminate(){
     _Exit(0);
 }
 
-//TODO
 /**
  * This method create a new txt file in the current directory.
  */
 void createTXT(){
+    const char *txtName;
+    printf("Name's file:\t");
+    scanf("%s",&txtName);
 
+    fclose(fopen(txtName,"a"));
 }
 
-//TODO
 /**
  * This method update a TXT file in the current directory.
  * @param TXT
  */
-void updateTXT(FILE *TXT){
+void updateTXT(const char *txtName){
 
 }
 

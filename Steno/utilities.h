@@ -1,11 +1,10 @@
 #ifndef OSPROJECT_UTILITIES_H
     #define OSPROJECT_UTILITIES_H
 
-    #include <stdio.h>
     #include "byteType.h"
 
     /**
-     * This method get the length of File.
+     * This method get the length of file.
      * @param f as File.
      * @return the length.
      */
