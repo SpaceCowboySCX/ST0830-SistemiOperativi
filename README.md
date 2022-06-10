@@ -19,13 +19,13 @@ Develop an application for Linux environment, specifically the tests will be per
    3. *communication*
    4. *signals*
 
-##Introduction
+## Introduction
 Steganography makes invisible communication.
 There are various forms of steganography, among them: injective, generative, substitutive, selective and
 constructive.
 We will use injective steganography.
 This project will fragment the text file into Bytes to then be able to manipulate the image.
 
-##Tutorial
+## Tutorial
 
-##Documents
+## Documents
