@@ -1,5 +1,6 @@
 #include "stenography.h"
 #include <stdio.h>
+#include "utilities.h"
 /**
  * This method hides a text file within an image.
  * The text file will be decomposed into bytes and
@@ -8,10 +9,12 @@
  * @param image
  * @return
  */
-int hiding(FILE txt, FILE image){
-    image.seek(10);
-    int offset = 0;
+int hiding(FILE* txt, FILE* img){
+    //image.seek(10);
+    setFileOffset(img, 10);
+    long offset = 0;
     image.read(&offset, sizeof(offset));
+
     image.seek(0);
 
     for (int j = 0; j < offset; ++j) {
@@ -77,7 +80,7 @@ int hiding(FILE txt, FILE image){
  * @param image
  * @return
  */
-int unveiling(FILE image, FILE text) {
+int unveiling(FILE* img, FILE* txt) {
     image.seek(10);
     int offset = 0;
     image.read(&offset, sizeof(offset));
