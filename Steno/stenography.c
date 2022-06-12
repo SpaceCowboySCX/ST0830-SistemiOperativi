@@ -9,7 +9,7 @@
  * @param image
  * @return
  */
-int hiding(FILE* txt, FILE* img){
+int hiding(FILE* txt, FILE* img) {
     /*
      * CREATION FILE OUTPUT
      */
@@ -45,15 +45,15 @@ int hiding(FILE* txt, FILE* img){
                 //char image_byte;
                 //image.read(&image_byte, sizeof(char));
                 readNextByte(charatter, img);
-                char to_write = (((char)charatter & 0xFE) | (((char) text_byte & x) >> i));
+                char to_write = (((char) charatter & 0xFE) | (((char) text_byte & x) >> i));
                 x <<= 1;
                 //out.write(to_write);
                 fprintf(out, to_write);
 
                 if ((i + 1) % 3 == 0) {
-                byte *x; //= image.read();
-                readNextByte(x, img);
-                fprintf(out, x);
+                    byte *x; //= image.read();
+                    readNextByte(x, img);
+                    fprintf(out, x);
                 }
             }
 
@@ -61,13 +61,13 @@ int hiding(FILE* txt, FILE* img){
             readNextByte(y, img);
             fprintf(out, y);
             //out.write(y);
+        } else {
+            byte x;// = image.read();
+            readNextByte(x, img);
+            x &= 0xFE;
+            fprintf(out, x);
+            //out.write(x);
         }
-    else{
-        byte x;// = image.read();
-        readNextByte(x, img);
-        x &= 0xFE;
-        fprintf(out, x);
-        //out.write(x);
     }
 }
 
@@ -80,37 +80,35 @@ int hiding(FILE* txt, FILE* img){
  * @return
  */
 int unveiling(FILE* img, FILE* txt) {
-    image.seek(10);
-    int offset = 0;
-    image.read(&offset, sizeof(offset));
+    //image.seek(10);
+    setFileOffset(img, 10);
+    long offset = 0;
+    //image.read(&offset, sizeof(offset));
+    offset = ftell(img);
 
-    image.seek(offset);
-    while (image.available()) {
-        setRgb(image.size(), image.position());
+    //image.seek(offset);
+    setFileOffset(img, offset);
+    byte *charatter;
+    byte *text_byte;
+    while (readNextByte(charatter, img)) {
+        text_byte = 0;
+        for (int i = 0; i < 8; ++i) {
 
-        for ( i = 0; i < 8; ++i) {
-            image.read(&image_byte, sizeof(char));
-                asm(
-                    "lds r24, (image_byte) \n"
-                    "lds r26, (text_byte) \n"
-                    "and r24, 0x01 \n"
-                    "lds r25, (i) \n"
-                    "loop:"
-                    "lsl r24 \n"
-                    "dec r25 \n"
-                    "brne loop \n"
-                    "or r26, r24 \n"
-                    :::"r24", "r26", "r25"
-                    );
+            //image.read(&image_byte, sizeof(char));
+            text_byte =  text_byte | ((charatter & 0x01) << i);
             if ((i + 1) % 3 == 0)
-                image.read();
+                fseek(img, sizeof (byte), SEEK_CUR);
+                //image.read();
+
         }
 
-        image.read();
-        text.write(text_byte);
+        fseek(img, sizeof (byte), SEEK_CUR);
+        fprintf(txt, text_byte);
+        //text.write(text_byte);
 
-        if (text_byte == 0)
-                break;
+        if (text_byte == 0) {
+            break;
+        }
     }
     return 0;
 }
