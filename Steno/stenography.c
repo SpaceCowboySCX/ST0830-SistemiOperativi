@@ -28,9 +28,9 @@ int hiding(FILE* txt, FILE* img) {
     setFileOffset(img, offset);
     //image.seek(offset);
     byte *text_byte;
-    while (readNextByte(charatter, img) != -1) {
+    while (readNextByte(charatter, img) == 0) {
 
-        if (readNextByte(text_byte, txt) != -1) {
+        if (readNextByte(text_byte, txt) == 0) {
             //char text_byte = text.read();
             byte x = 0x01;
 
