@@ -2,98 +2,83 @@
 #include <stdio.h>
 #include "utilities.h"
 
-//TODO polish
 int hiding(FILE* file_img, FILE* file_txt, FILE* file_img_output){
-    /*
-     * CREATION FILE OUTPUT
-     */
-
     byte byte_img;
     byte byte_text;
-    //FILE *out = fopen("output.bmp", "w");
-    //image.seek(10);
-    setFileOffset(file_img, 10);
 
+    //Sposto il puntatore dopo l'header
+    setFileOffset(file_img, 10);
     long offset = ftell(file_img);
-    //image.read(&offset, sizeof(offset));
+    //Sposto il puntatore all'inizio del file
     setFileOffset(file_img, 0);
-    //image.seek(0);
     //Sovrascrivo l'header dell'immagine di output
     for (int index = 0; index < offset; index++) {
-        //char x;
         readNextByte(&byte_img, file_img);
-        //image.read(&x, sizeof(char));
         fprintf(file_img_output, "%c", byte_img);
-        //out.write(x);
     }
 
+    //Sposto il puntatore dopo l'header.
     setFileOffset(file_img, offset);
-    //image.seek(offset);
     while (readNextByte(&byte_img, file_img) == 0) {
+        //Controllo se il txt è stato ricopiato interamente.
         if (readNextByte(&byte_text, file_txt) == 0) {
-            //char text_byte = text.read();
             byte to_compare = 0x01;
 
+            //Scrivo ogni bit del byte_text su tre byte dell'immagine
             for (int index = 0; index < 8; index++) {
-                //char image_byte;
-                //image.read(&image_byte, sizeof(char));
                 readNextByte(&byte_img, file_img);
+                //Operazione bit a bit sul byte to_write
                 byte to_write = (( byte_img & 0xFE) | (( byte_text & to_compare) >> index));
                 to_compare<<= 1;
-                //out.write(to_write);
                 fprintf(file_img_output, "%c",to_write);
 
-                if ((index + 1) % 3 == 0) {
-                    byte to_skip; //= image.read();
-                    readNextByte(&to_skip, file_img);
-                    fprintf(file_img_output, "%c",to_skip);
-                }
+                //Essendo privo di significato, il quarto byte deve essere saltato in quanto non modificabile
+                //Ricopio il byte dell'immagine originale.
+                if ((index + 1) % 3 == 0)
+                    toSkip(file_img, file_img_output);
             }
 
-            byte to_skip; //= image.read();
-            readNextByte(&to_skip, file_img);
-            fprintf(file_img_output, "%c",to_skip);
-            //out.write(y);
+            //Ricopio i byte dell'immagine originale in quanto il txt è terminato.
+            toSkip(file_img, file_img_output);
         } else {
-            byte copy_of_byte_img;// = image.read();
+            //ALTRIMENTI ricopio il byte dell'immagine non modificati
+            byte copy_of_byte_img;
             readNextByte(&copy_of_byte_img, file_img);
             copy_of_byte_img &= 0xFE;
             fprintf(file_img_output, "%c", copy_of_byte_img);
-            //out.write(x);
         }
     }
 }
 
-//TODO polish
-//file_txt è il file dove andremo a scrivere il testo nascosto nell'immagine.
+void toSkip(FILE* file_img, FILE* file_img_output){
+    byte to_skip; //= image.read();
+    readNextByte(&to_skip, file_img);
+    fprintf(file_img_output, "%c",to_skip);
+}
+
 int unveiling(FILE* file_img, FILE* file_txt_output) {
-    //image.seek(10);
-    setFileOffset(file_img, 10);
-    //image.read(&offset, sizeof(offset));
-    //long offset_file_img = ftell(file_img);
-    //image.seek(offset);
-    //setFileOffset(file_img, offset_file_img);
+
     byte byte_img;
     byte byte_text;
 
-    while (readNextByte(&byte_img, file_img) == 0) {
-        //Reset di byte_text
-        byte_text = 0;
-        //index rappresenta il singolo bit
-        for (int index = 0; index < 8; index++) {
-            //image.read(&image_byte, sizeof(char));
-            byte_text |= ((byte_img & 0x01) << index);
+    //Sposto il puntatore dopo l'header.
+    setFileOffset(file_img, 10);
 
+    while (readNextByte(&byte_img, file_img) == 0) {
+        //Reset di byte_text.
+        byte_text = 0;
+        //Index rappresenterà il singolo bit.
+        for (int index = 0; index < 8; index++) {
+            byte_text |= ((byte_img & 0x01) << index);
+            //Essendo privo di significato, il quarto byte deve essere saltato.
             if ((index + 1) % 3 == 0)
                 fseek(file_img, sizeof (byte), SEEK_CUR);
-                //image.read();
-
         }
 
         fseek(file_img, sizeof (byte), SEEK_CUR);
         fprintf(file_txt_output, "%c", byte_text);
-        //text.write(text_byte);
 
+        //Se leggo il terminatore di stringa '\0' concludo la funzione.
         if (byte_text == 0)
             break;
     }

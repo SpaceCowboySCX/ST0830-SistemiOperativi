@@ -15,6 +15,13 @@
 int hiding(FILE* file_img, FILE* file_txt, FILE* file_img_output);
 
 /**
+ * This method write a byte to skip.
+ * @param file_img
+ * @param file_img_output
+ */
+void toSkip(FILE* file_img, FILE* file_img_output);
+
+/**
  * This method unveil a text file from an image.
  * The text file will be recomposed into bytes and
  * then into bits in order to alter the pixels of the image.
