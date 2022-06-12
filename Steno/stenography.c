@@ -1,14 +1,7 @@
 #include "stenography.h"
 #include <stdio.h>
 #include "utilities.h"
-/**
- * This method hides a text file within an image.
- * The text file will be decomposed into bytes and
- * then into bits in order to alter the pixels of the image.
- * @param txt
- * @param image
- * @return
- */
+
 int hiding(FILE* txt, FILE* img) {
     /*
      * CREATION FILE OUTPUT
@@ -29,7 +22,7 @@ int hiding(FILE* txt, FILE* img) {
         //char x;
         readNextByte(charatter, img);
         //image.read(&x, sizeof(char));
-        fprintf(out, "%s", charatter);
+        fprintf(out, "%c", charatter);
         //out.write(x);
     }
     setFileOffset(img, offset);
@@ -48,37 +41,29 @@ int hiding(FILE* txt, FILE* img) {
                 char to_write = (((char) charatter & 0xFE) | (((char) text_byte & x) >> i));
                 x <<= 1;
                 //out.write(to_write);
-                fprintf(out, to_write);
+                fprintf(out, "%c",to_write);
 
                 if ((i + 1) % 3 == 0) {
                     byte *x; //= image.read();
                     readNextByte(x, img);
-                    fprintf(out, x);
+                    fprintf(out, "%c",x);
                 }
             }
 
             byte y;// = image.read();
             readNextByte(y, img);
-            fprintf(out, y);
+            fprintf(out, "%c",y);
             //out.write(y);
         } else {
             byte x;// = image.read();
             readNextByte(x, img);
             x &= 0xFE;
-            fprintf(out, x);
+            fprintf(out, "%c", x);
             //out.write(x);
         }
     }
 }
 
-/**
- * This method unveil a text file from an image.
- * The text file will be recomposed into bytes and
- * then into bits in order to alter the pixels of the image.
- * @param txt
- * @param image
- * @return
- */
 int unveiling(FILE* img, FILE* txt) {
     //image.seek(10);
     setFileOffset(img, 10);
@@ -103,7 +88,7 @@ int unveiling(FILE* img, FILE* txt) {
         }
 
         fseek(img, sizeof (byte), SEEK_CUR);
-        fprintf(txt, text_byte);
+        fprintf(txt, "%c", text_byte);
         //text.write(text_byte);
 
         if (text_byte == 0) {
