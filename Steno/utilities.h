@@ -11,6 +11,12 @@
     long getFileLength(FILE *f);
 
     /**
+     * This method set the offset of File .
+     * @param f as File.
+     */
+    void setFileOffset(FILE *f, long offset)
+
+    /**
      * This method check error on file.
      * @param f as File to check.
      * @return 0 if it don't find an error.

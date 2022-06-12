@@ -6,6 +6,13 @@ long getFileLength(FILE *f){
     fseek(f, 0, SEEK_SET);
     return length;
 }
+/**
+ * This method set the offset of File .
+ * @param f as File.
+ */
+void setFileOffset(FILE *f, long offset){
+    fseek(f, offset, SEEK_SET);
+}
 
 int fileErrorCheck(FILE *f){
     if(ferror(f)){

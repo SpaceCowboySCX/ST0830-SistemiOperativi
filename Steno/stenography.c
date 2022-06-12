@@ -1,99 +1,114 @@
 #include "stenography.h"
-//TODO
-int hiding(FILE txt, FILE image){
-    image.seek(10);
-    int offset = 0;
-    image.read(&offset, sizeof(offset));
-    image.seek(0);
+#include <stdio.h>
+#include "utilities.h"
+/**
+ * This method hides a text file within an image.
+ * The text file will be decomposed into bytes and
+ * then into bits in order to alter the pixels of the image.
+ * @param txt
+ * @param image
+ * @return
+ */
+int hiding(FILE* txt, FILE* img) {
+    /*
+     * CREATION FILE OUTPUT
+     */
+    FILE *out = fopen("output.bmp", "w");
+    //image.seek(10);
+    setFileOffset(img, 10);
 
+    long offset = 0;
+
+    offset = ftell(img);
+    //image.read(&offset, sizeof(offset));
+
+    setFileOffset(img, 0);
+    //image.seek(0);
+    byte *charatter;
     for (int j = 0; j < offset; ++j) {
-        char x;
-        image.read(&x, sizeof(char));
-        out.write(x);
+        //char x;
+        readNextByte(charatter, img);
+        //image.read(&x, sizeof(char));
+        fprintf(out, "%s", charatter);
+        //out.write(x);
     }
+    setFileOffset(img, offset);
+    //image.seek(offset);
+    byte *text_byte;
+    while (readNextByte(charatter, img) != -1) {
 
-    image.seek(offset);
-
-    while (image.available()) {
-        setRgb(image.size(), image.position());
-
-        if (text.available()) {
-            char text_byte = text.read();
-            char x = 0x01;
+        if (readNextByte(text_byte, txt) != -1) {
+            //char text_byte = text.read();
+            byte x = 0x01;
 
             for (int i = 0; i < 8; ++i) {
-                char image_byte;
-                image.read(&image_byte, sizeof(char));
-                char to_write = ((image_byte & 0xFE) | ((text_byte & x) >> i));
+                //char image_byte;
+                //image.read(&image_byte, sizeof(char));
+                readNextByte(charatter, img);
+                char to_write = (((char) charatter & 0xFE) | (((char) text_byte & x) >> i));
                 x <<= 1;
-                asm(
-                    "lds r24, (image_byte) \n"
-                    "lds r26, (text_byte) \n"
-                    "and r24, 0xFE \n"
-                    "and r24, 0x01 \n"
-                    "lds r25, (i) \n"
-                    "loop:"
-                    "lsr r26"
-                    "dec r25 \n"
-                    "brne loop \n"
-                    "or r24, r26 \n"
-                    "lds r28, (to_write) \n"
-                    "mov r28, r24 \n"
-                    :: :"r26", "r24", "r25", "r26"
-                    );
-
-                x <<= 1;
-                out.write(to_write);
+                //out.write(to_write);
+                fprintf(out, to_write);
 
                 if ((i + 1) % 3 == 0) {
-                char x = image.read();
-                out.write(x);
+                    byte *x; //= image.read();
+                    readNextByte(x, img);
+                    fprintf(out, x);
                 }
             }
 
-            char y = image.read();
-            out.write(y);
+            byte y;// = image.read();
+            readNextByte(y, img);
+            fprintf(out, y);
+            //out.write(y);
+        } else {
+            byte x;// = image.read();
+            readNextByte(x, img);
+            x &= 0xFE;
+            fprintf(out, x);
+            //out.write(x);
         }
-    else{
-        char x = image.read();
-        x &= 0xFE;
-        out.write(x);
     }
 }
 
-//TODO
-int unveiling(FILE image, FILE text){
-    image.seek(10);
-    int offset = 0;
-    image.read(&offset, sizeof(offset));
+/**
+ * This method unveil a text file from an image.
+ * The text file will be recomposed into bytes and
+ * then into bits in order to alter the pixels of the image.
+ * @param txt
+ * @param image
+ * @return
+ */
+int unveiling(FILE* img, FILE* txt) {
+    //image.seek(10);
+    setFileOffset(img, 10);
+    long offset = 0;
+    //image.read(&offset, sizeof(offset));
+    offset = ftell(img);
 
-    image.seek(offset);
-    while (image.available()) {
-        setRgb(image.size(), image.position());
+    //image.seek(offset);
+    setFileOffset(img, offset);
+    byte *charatter;
+    byte *text_byte;
+    while (readNextByte(charatter, img)) {
+        text_byte = 0;
+        for (int i = 0; i < 8; ++i) {
 
-        for ( i = 0; i < 8; ++i) {
-            image.read(&image_byte, sizeof(char));
-                asm(
-                    "lds r24, (image_byte) \n"
-                    "lds r26, (text_byte) \n"
-                    "and r24, 0x01 \n"
-                    "lds r25, (i) \n"
-                    "loop:"
-                    "lsl r24 \n"
-                    "dec r25 \n"
-                    "brne loop \n"
-                    "or r26, r24 \n"
-                    :::"r24", "r26", "r25"
-                    );
+            //image.read(&image_byte, sizeof(char));
+            text_byte =  text_byte | ((charatter & 0x01) << i);
             if ((i + 1) % 3 == 0)
-                image.read();
+                fseek(img, sizeof (byte), SEEK_CUR);
+                //image.read();
+
         }
 
-        image.read();
-        text.write(text_byte);
+        fseek(img, sizeof (byte), SEEK_CUR);
+        fprintf(txt, text_byte);
+        //text.write(text_byte);
 
-        if (text_byte == 0)
-                break;
+        if (text_byte == 0) {
+            break;
+        }
     }
     return 0;
 }
