@@ -12,7 +12,7 @@
  * @param img
  * @return
  */
-int hiding(FILE* img, FILE* txt);
+int hiding(FILE* file_img, FILE* file_txt, FILE* file_img_output);
 
 /**
  * This method unveil a text file from an image.
@@ -22,5 +22,5 @@ int hiding(FILE* img, FILE* txt);
  * @param img
  * @return
  */
-int unveiling(FILE* img, FILE* txt);
+int unveiling(FILE* file_img, FILE* file_txt_output);
 #endif //ST0830_O_S_PROJECT_STENOGRAPHY_H

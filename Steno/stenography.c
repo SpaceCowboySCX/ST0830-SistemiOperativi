@@ -2,98 +2,99 @@
 #include <stdio.h>
 #include "utilities.h"
 
-int hiding(FILE* txt, FILE* img) {
+//TODO polish
+int hiding(FILE* file_img, FILE* file_txt, FILE* file_img_output){
     /*
      * CREATION FILE OUTPUT
      */
-    FILE *out = fopen("output.bmp", "w");
+
+    byte byte_img;
+    byte byte_text;
+    //FILE *out = fopen("output.bmp", "w");
     //image.seek(10);
-    setFileOffset(img, 10);
+    setFileOffset(file_img, 10);
 
-    long offset = 0;
-
-    offset = ftell(img);
+    long offset = ftell(file_img);
     //image.read(&offset, sizeof(offset));
-
-    setFileOffset(img, 0);
+    setFileOffset(file_img, 0);
     //image.seek(0);
-    byte *charatter;
-    for (int j = 0; j < offset; ++j) {
+    //Sovrascrivo l'header dell'immagine di output
+    for (int index = 0; index < offset; index++) {
         //char x;
-        readNextByte(charatter, img);
+        readNextByte(&byte_img, file_img);
         //image.read(&x, sizeof(char));
-        fprintf(out, "%c", charatter);
+        fprintf(file_img_output, "%c", byte_img);
         //out.write(x);
     }
-    setFileOffset(img, offset);
+
+    setFileOffset(file_img, offset);
     //image.seek(offset);
-    byte *text_byte;
-    while (readNextByte(charatter, img) != -1) {
-
-        if (readNextByte(text_byte, txt) != -1) {
+    while (readNextByte(&byte_img, file_img) == 0) {
+        if (readNextByte(&byte_text, file_txt) == 0) {
             //char text_byte = text.read();
-            byte x = 0x01;
+            byte to_compare = 0x01;
 
-            for (int i = 0; i < 8; ++i) {
+            for (int index = 0; index < 8; index++) {
                 //char image_byte;
                 //image.read(&image_byte, sizeof(char));
-                readNextByte(charatter, img);
-                char to_write = (((char) charatter & 0xFE) | (((char) text_byte & x) >> i));
-                x <<= 1;
+                readNextByte(&byte_img, file_img);
+                byte to_write = (( byte_img & 0xFE) | (( byte_text & to_compare) >> index));
+                to_compare<<= 1;
                 //out.write(to_write);
-                fprintf(out, "%c",to_write);
+                fprintf(file_img_output, "%c",to_write);
 
-                if ((i + 1) % 3 == 0) {
-                    byte *x; //= image.read();
-                    readNextByte(x, img);
-                    fprintf(out, "%c",x);
+                if ((index + 1) % 3 == 0) {
+                    byte to_skip; //= image.read();
+                    readNextByte(&to_skip, file_img);
+                    fprintf(file_img_output, "%c",to_skip);
                 }
             }
 
-            byte y;// = image.read();
-            readNextByte(y, img);
-            fprintf(out, "%c",y);
+            byte to_skip; //= image.read();
+            readNextByte(&to_skip, file_img);
+            fprintf(file_img_output, "%c",to_skip);
             //out.write(y);
         } else {
-            byte x;// = image.read();
-            readNextByte(x, img);
-            x &= 0xFE;
-            fprintf(out, "%c", x);
+            byte copy_of_byte_img;// = image.read();
+            readNextByte(&copy_of_byte_img, file_img);
+            copy_of_byte_img &= 0xFE;
+            fprintf(file_img_output, "%c", copy_of_byte_img);
             //out.write(x);
         }
     }
 }
 
-int unveiling(FILE* img, FILE* txt) {
+//TODO polish
+//file_txt è il file dove andremo a scrivere il testo nascosto nell'immagine.
+int unveiling(FILE* file_img, FILE* file_txt_output) {
     //image.seek(10);
-    setFileOffset(img, 10);
-    long offset = 0;
+    setFileOffset(file_img, 10);
     //image.read(&offset, sizeof(offset));
-    offset = ftell(img);
-
+    //long offset_file_img = ftell(file_img);
     //image.seek(offset);
-    setFileOffset(img, offset);
-    byte *charatter;
-    byte *text_byte;
-    while (readNextByte(charatter, img)) {
-        text_byte = 0;
-        for (int i = 0; i < 8; ++i) {
+    //setFileOffset(file_img, offset_file_img);
+    byte byte_img;
+    byte byte_text;
 
+    while (readNextByte(&byte_img, file_img) == 0) {
+        //Reset di byte_text
+        byte_text = 0;
+        //index rappresenta il singolo bit
+        for (int index = 0; index < 8; index++) {
             //image.read(&image_byte, sizeof(char));
-            text_byte =  text_byte | ((charatter & 0x01) << i);
-            if ((i + 1) % 3 == 0)
-                fseek(img, sizeof (byte), SEEK_CUR);
-                //image.read();
+            byte_text |= ((byte_img & 0x01) << index);
 
+            if ((index + 1) % 3 == 0)
+                fseek(file_img, sizeof (byte), SEEK_CUR);
+                //image.read();
         }
 
-        fseek(img, sizeof (byte), SEEK_CUR);
-        fprintf(txt, "%c", text_byte);
+        fseek(file_img, sizeof (byte), SEEK_CUR);
+        fprintf(file_txt_output, "%c", byte_text);
         //text.write(text_byte);
 
-        if (text_byte == 0) {
+        if (byte_text == 0)
             break;
-        }
     }
     return 0;
 }
