@@ -67,4 +67,5 @@ void executeHiding(){
     * Controllo lunghezza immagine
     * controllo lunghezza testo
     * !deve essere (Lunghezza)/8 < Lunghezza immagine!
+    */
 }
