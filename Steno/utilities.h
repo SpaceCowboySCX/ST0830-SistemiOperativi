@@ -1,6 +1,7 @@
 #ifndef OSPROJECT_UTILITIES_H
     #define OSPROJECT_UTILITIES_H
 
+    #include <string.h>
     #include "byteType.h"
 
     /**
@@ -33,4 +34,14 @@
      *         1 else.
      */
     int readNextByte(byte* B, FILE *f);
+    /**
+     * This method check the extension of file passed by param.
+     * @param string
+     *                  the name of file to check.
+     * @return  0 - no extension - added ".txt"
+     *          1 - ".txt"
+     *         -1 - ".bmp"
+     */
+    int extensionFileCheck(char string[MAX_LENGTH_STRING]);
+
 #endif //OSPROJECT_UTILITIES_H
