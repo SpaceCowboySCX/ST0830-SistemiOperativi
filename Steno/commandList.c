@@ -14,7 +14,7 @@ void help(){
 int changeDirectory(const char *PATH){
     if(strlen(PATH) > MAX_PATH)
         return -1;
-
+    //TODO check the path
     return chdir(PATH);
 }
 
@@ -42,6 +42,7 @@ void printTXT(){
     printf("Name's file:\t");
     scanf("%s", string);
 
+    //TODO check if exist
     if(extensionFileCheck(string) != 1) {
         fileToPrint = fopen(string, "r");
         characterToPrint = fgetc(fileToPrint);
@@ -53,6 +54,7 @@ void printTXT(){
         fclose(fileToPrint);
     }
 }
+
 
 void currentPath(){
     char currentPath[MAX_PATH];

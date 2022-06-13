@@ -1,6 +1,3 @@
-//
-// Created by mrerror404 on 6/13/22.
-//
 #include "list.h"
 
 Node *first_element;
