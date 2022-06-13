@@ -1,7 +1,11 @@
 #ifndef ST0830_O_S_PROJECT_COMMANDLIST_H
     #define ST0830_O_S_PROJECT_COMMANDLIST_H
 
-    #include <stdio.h>
+    #include "utilities.h"
+    #include <stdlib.h>
+    #include <unistd.h>
+
+    #define MAX_PATH 200
 
     /**
      * This method explain the command for the line command interface.
@@ -25,14 +29,18 @@
     void createTXT();
 
     /**
-     * This method update a TXT file in the current directory.
+     * This method print a TXT file in the current directory.
      * @param TXT
      */
-    void updateTXT(const char *txtName);
+    void printTXT(const char *txtName);
 
     /**
      * This method return the current path.
      * @return
      */
-    const char currentPath();
+    void currentPath();
+
+    void executeHiding();
+
+    void executeUnveiling();
 #endif //ST0830_O_S_PROJECT_COMMANDLIST_H

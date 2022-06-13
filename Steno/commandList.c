@@ -1,30 +1,16 @@
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
 #include "commandList.h"
 
-#define MAX_PATH 200
-
-//TODO
-/**
- * This method explain the command for the line command interface.
- */
 void help(){
-
     printf("Type 1) currentPath:\tShow the path of current directory.\n");
     printf("Type 2) showContent:\tShow the content of current directory.\n");
     printf("Type 3) changeDirectory:\tChange the current directory to the one passed by param.\n");
     printf("Type 4) createTXT:\tCreate a new txt file in the current directory.\n");
-    printf("Type 5) updateTXT:\tUpdate a TXT file in the current directory.\n");
+    printf("Type 5) checkTXT:\tPrint a TXT file in the current directory.\n");
+    printf("Type 6) executeHiding:\tExecute hiding Algorithm");
+    printf("Type 7) executeUnveiling:\tExecute unveiling Algorithm");
     printf("Type 0) terminate:\tTerminate the program execution.\n");
 }
 
-/**
- * This method change the current directory to the one passed by param.
- * @param PATH
- *
- * @return -1: error - @param PATH too long
- */
 int changeDirectory(const char *PATH){
     if(strlen(PATH) > MAX_PATH)
         return -1;
@@ -32,37 +18,53 @@ int changeDirectory(const char *PATH){
     return chdir(PATH);
 }
 
-/**
- * This method terminate the program execution.
- */
 void terminate(){
+    printf("Thanks!");
     _Exit(0);
 }
 
-/**
- * This method create a new txt file in the current directory.
- */
 void createTXT(){
-    const char *txtName;
+    char string[MAX_LENGTH_STRING];
+
     printf("Name's file:\t");
-    scanf("%s",&txtName);
+    scanf("%s", string);
 
-    fclose(fopen(txtName,"a"));
+    if(extensionFileCheck(string) != 1)
+        fclose(fopen(string,"at"));
+    else
+        perror("Error: don't try to declare a txt file with another extension.\n");
 }
 
-/**
- * This method update a TXT file in the current directory.
- * @param TXT
- */
-void updateTXT(const char *txtName){
+void printTXT(){
+    FILE *fileToPrint;
+    char string[MAX_LENGTH_STRING], characterToPrint;
 
+    printf("Name's file:\t");
+    scanf("%s", string);
+
+    if(extensionFileCheck(string) != 1) {
+        fileToPrint = fopen(string, "r");
+        characterToPrint = fgetc(fileToPrint);
+
+        while(characterToPrint != EOF) {
+            printf("%c", characterToPrint);
+            characterToPrint = fgetc(fileToPrint);
+        }
+        fclose(fileToPrint);
+    }
 }
 
-//TODO
-/**
- * This method return the current path.
- * @return
- */
-const char currentPath(){
+void currentPath(){
+    char currentPath[MAX_PATH];
+    if(getcwd(currentPath, sizeof(currentPath)) != NULL)
+        printf("%s", currentPath);
+    else
+        perror("Error: getcwd() error.\n");
+}
 
+void executeHiding(){
+    /*Apertura file
+    * Controllo lunghezza immagine
+    * controllo lunghezza testo
+    * !deve essere (Lunghezza)/8 < Lunghezza immagine!
 }
