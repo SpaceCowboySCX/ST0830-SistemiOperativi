@@ -14,7 +14,7 @@
      * This method set the offset of File .
      * @param f as File.
      */
-    void setFileOffset(FILE *f, long offset)
+    void setFileOffset(FILE *f, long offset);
 
     /**
      * This method check error on file.

@@ -10,4 +10,4 @@ add_executable(ST0830_O_S_Project
         Steno/main.c
         Steno/utilities.c Steno/utilities.h
         Steno/commandList.h Steno/commandList.c
-        Steno/stenography.c Steno/stenography.h)
+        Steno/stenography.c Steno/stenography.h Steno/list.c Steno/list.h)
