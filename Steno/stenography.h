@@ -2,7 +2,7 @@
 #define ST0830_O_S_PROJECT_STENOGRAPHY_H
 
 #include <bits/types/FILE.h>
-#include "byteType.h"
+#include "utilities.h"
 
 /**
  * This method hides a text file within an image.
