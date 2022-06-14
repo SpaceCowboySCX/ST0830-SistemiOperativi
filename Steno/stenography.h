@@ -30,4 +30,6 @@ void toSkip(FILE* file_img, FILE* file_img_output);
  * @return
  */
 int unveiling(FILE* file_img, FILE* file_txt_output);
+
+int lengthFileCheck(FILE* file_img, FILE* file_txt);
 #endif //ST0830_O_S_PROJECT_STENOGRAPHY_H

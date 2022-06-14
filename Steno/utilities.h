@@ -2,7 +2,9 @@
     #define OSPROJECT_UTILITIES_H
 
     #include <string.h>
+    #include <sys/stat.h>
     #include "byteType.h"
+    #define MAX_PATH 200
 
     /**
      * This method get the length of file.
@@ -38,10 +40,16 @@
      * This method check the extension of file passed by param.
      * @param string
      *                  the name of file to check.
-     * @return  0 - no extension - added ".txt"
-     *          1 - ".txt"
+     * @return  1 - ".txt"
+     *          0 - other file
      *         -1 - ".bmp"
      */
     int extensionFileCheck(char string[MAX_LENGTH_STRING]);
 
+    /**
+     * This method check that path exist.
+     * @param path
+     * @return
+     */
+    int isDirectoryExist(const char *path);
 #endif //OSPROJECT_UTILITIES_H

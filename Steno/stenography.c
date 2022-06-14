@@ -27,7 +27,7 @@ int hiding(FILE* file_img, FILE* file_txt, FILE* file_img_output){
                 readNextByte(&byte_img, file_img);
                 //Operazione bit a bit sul byte to_write
                 byte to_write = (( byte_img & 0xFE) | (( byte_text & to_compare) >> index));
-                to_compare<<= 1;
+                to_compare <<= 1;
                 fprintf(file_img_output, "%c",to_write);
 
                 //Essendo privo di significato, il quarto byte deve essere saltato in quanto non modificabile
@@ -81,4 +81,27 @@ int unveiling(FILE* file_img, FILE* file_txt_output) {
             break;
     }
     return 0;
+}
+
+int lengthFileCheck(FILE* file_img, FILE* file_txt){
+    int index;
+    long int img_length, txt_length;
+
+    //I primi 10 byte appartengono all' header e non devono essere modificati.
+    fseek(file_img, 10, SEEK_CUR);
+
+    //Il primo byte appartenente a un pixel
+    fread(&index, 1, sizeof(int), file_img);
+    fseek(file_img, 2, SEEK_SET);
+    fread(&img_length, 1, sizeof(int), file_img);
+
+    img_length -= index;
+    txt_length = getFileLength(file_txt);
+
+    if((txt_length + txt_length / 4) * 8 > img_length){
+        printf("Text too long for the image to be hidden.");
+        return -1;
+    }
+
+    return index;
 }

@@ -1,12 +1,10 @@
 #ifndef ST0830_O_S_PROJECT_COMMANDLIST_H
     #define ST0830_O_S_PROJECT_COMMANDLIST_H
 
-    #include "utilities.h"
+    #include "stenography.h"
     #include <stdlib.h>
     #include <unistd.h>
     #include <dirent.h>
-
-    #define MAX_PATH 200
 
     /**
      * This method explain the command for the line command interface.

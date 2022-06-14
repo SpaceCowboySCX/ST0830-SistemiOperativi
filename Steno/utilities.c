@@ -36,7 +36,13 @@ int extensionFileCheck(char string[MAX_LENGTH_STRING]){
             return -1;
     }
 
-    //Se l'utente non ha specificato l'estensione del file, aggiungo ".txt".
-    strcat(string, ".txt");
     return 0;
+}
+
+int isDirectoryExist(const char *path){
+    if(strlen(path) < MAX_PATH)
+        return 0;
+
+    struct stat sb;
+    return stat(path, &sb) == 0 && S_ISDIR(sb.st_mode);
 }
