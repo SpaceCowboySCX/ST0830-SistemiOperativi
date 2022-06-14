@@ -13,4 +13,7 @@ void insert(char array[]);
 
 char* readAndRemove();
 
+//split: return un puntatore di stringhe
+//da un input separa le varie stringhe, a ogni spazio incontrato separa
+
 #endif //ST0830_O_S_PROJECT_LIST_H

@@ -28,7 +28,7 @@ int readNextByte(byte *B, FILE *f){
 
 int extensionFileCheck(char string[MAX_LENGTH_STRING]){
     //Una stringa con meno di cinque caratteri sicuramente non contiene il nome con l'estensione inclusa
-    if(strlen(string) > 5) {
+    if(strlen(string) >= 5) {
         //Se l'utente non ha specificato l'estensione del file, aggiungo ".txt".
         const char *extension = &string[strlen(string) - 4];
         if (strcmp(extension, ".txt") == 0)
@@ -40,3 +40,4 @@ int extensionFileCheck(char string[MAX_LENGTH_STRING]){
     strcat(string, ".txt");
     return 0;
 }
+
