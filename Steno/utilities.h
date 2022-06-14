@@ -44,4 +44,6 @@
      */
     int extensionFileCheck(char string[MAX_LENGTH_STRING]);
 
+    char* split(char str[]);
+
 #endif //OSPROJECT_UTILITIES_H

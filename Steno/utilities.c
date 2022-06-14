@@ -40,3 +40,19 @@ int extensionFileCheck(char string[MAX_LENGTH_STRING]){
     strcat(string, ".txt");
     return 0;
 }
+
+char* split(char str[])
+{
+    //Separatore di stringa sono presegnalati da aperte che chiuse le doppie ""
+    int index = 0;
+    char* token = strtok(str, " ");
+    static char array[10][MAX_LENGTH_STRING];
+    if(token != NULL) strcpy( array[0], token);
+    while(token != NULL)
+    {
+        index = index + 1;
+        token = strtok(NULL, " ");
+        strcpy( array[index], token);
+    }
+    return (char*) array;
+}
