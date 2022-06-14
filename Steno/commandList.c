@@ -37,7 +37,7 @@ int showContent(){
     return 0;
 }
 
-int changeDirectory(const char *path){
+int changeDirectory(char path[MAX_PATH]){
     if(isDirectoryExist(path))
         return chdir(path);
 
@@ -61,13 +61,14 @@ void createTXT(){
 
 void printTXT(){
     FILE *file_to_print;
-    char string[MAX_LENGTH_STRING], character_to_print;
+    char file_name_txt[MAX_LENGTH_STRING], character_to_print;
 
+    printf("\t!Attention!\nYou must enter \".txt\" at the end of name's file.\n");
     printf("Name's file:\t");
-    scanf("%s", string);
+    scanf("%s", file_name_txt);
 
-    if(extensionFileCheck(string) == 1) {
-        file_to_print = fopen(string, "r");
+    if(extensionFileCheck(file_name_txt) == 1) {
+        file_to_print = fopen(file_name_txt, "r");
         character_to_print = (char)fgetc(file_to_print);
 
         while(character_to_print != EOF) {

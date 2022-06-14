@@ -27,7 +27,7 @@
      * This method change the current directory to the one passed by param.
      * @param PATH
      */
-    int changeDirectory(const char *PATH);
+    int changeDirectory(char path[MAX_PATH]);
 
     /**
      * This method create a new txt file in the current directory.
@@ -38,7 +38,7 @@
      * This method print a TXT file in the current directory.
      * @param TXT
      */
-    void printTXT(const char *txtName);
+    void printTXT();
 
     /**
      * This method read file and execute the algorithm for Hiding.
