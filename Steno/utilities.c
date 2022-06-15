@@ -41,18 +41,35 @@ int extensionFileCheck(char string[MAX_LENGTH_STRING]){
     return 0;
 }
 
-char* split(char str[])
-{
-    //Separatore di stringa sono presegnalati da aperte che chiuse le doppie ""
-    int index = 0;
+Node* split(char str[]) {
     char* token = strtok(str, " ");
-    static char array[10][MAX_LENGTH_STRING];
-    if(token != NULL) strcpy( array[0], token);
-    while(token != NULL)
+    char string[MAX_LENGTH_STRING];
+    strcpy(string, token);
+    insert(string);
+    while((token = strtok(NULL," ") )!= NULL)
     {
-        index = index + 1;
-        token = strtok(NULL, " ");
-        strcpy( array[index], token);
+        strcpy(string, token);
+        insert(string);
     }
-    return (char*) array;
+    return getFirstElement();
 }
+//ESEMPIO DI COME UTILIZARE UNA LISTA
+//char str[]= "dijnfids djfndsjfnijd ";
+//Node* lista = split(str);
+//
+//printf("Stampa: %s", getStringOfElement(lista));
+//while(getNext(lista) != NULL)
+//{
+//lista = getNext(lista);
+//printf("Stampa: %s", getStringOfElement(lista));
+//}
+
+//int getNumberToken(char str[])
+//{
+//    int count = 0;
+//    while(strtok(str, " "))
+//    {
+//        count++;
+//    }
+//    return count;
+//}
