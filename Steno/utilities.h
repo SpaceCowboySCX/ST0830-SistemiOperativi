@@ -6,6 +6,10 @@
     #include "byteType.h"
     #define MAX_PATH 200
 
+#include "list.h"
+
+
+
     /**
      * This method get the length of file.
      * @param f as File.
@@ -52,4 +56,22 @@
      * @return
      */
     int isDirectoryExist(const char *path);
+    /**
+    * This method split an string.
+    * @param string
+    *                  the name of file to check.
+    * @return
+    *                  firstElement on the list
+    */
+    Node* split(char str[]);
+
+//    /**
+//    * This method count token in an string .
+//    * @param string
+//    *                  string for the count token.
+//    * @return
+//    *                  count of token in this string.
+//    */
+//    int getNumberToken(char str[]);
+
 #endif //OSPROJECT_UTILITIES_H

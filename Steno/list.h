@@ -9,11 +9,55 @@ struct Node{
     struct Node *next;
 } typedef Node;
 
-void insert(char array[]);
+    /**
+     * This method put an element string on list.
+     * @param
+     *                  array of char.
+     * @return
+     *                  firstElement of list
+     */
+Node* insert(char array[]);
 
+    /**
+     * This method return firstElement on the list.
+     * @return
+     *                  firstElement of list
+     */
+Node *getFirstElement();
+
+/**
+ * This method readAndRemove 1 element on the list.
+ * @return
+ *                     string value of element.
+ */
 char* readAndRemove();
 
-//split: return un puntatore di stringhe
-//da un input separa le varie stringhe, a ogni spazio incontrato separa
+
+/**
+ * This method return new of the list element.
+ * @param element
+ *                  element of the next.
+ * @return
+ *                  next node of element.
+ */
+Node* getNext(Node* element);
+
+
+/**
+ * This method return an string of this element.
+ * @param element
+ *                  element of the list.
+ * @return
+ *                  string of this element
+ */
+char* getStringOfElement(Node* element);
+
+
+/**
+ * This method return lastElement on the list.
+ * @return
+ *                  firstElement of list
+ */
+Node* getLastElement();
 
 #endif //ST0830_O_S_PROJECT_LIST_H
