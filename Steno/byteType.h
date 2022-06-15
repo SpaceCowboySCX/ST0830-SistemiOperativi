@@ -5,5 +5,5 @@
 #include <stdio.h>
 #include <string.h>
     typedef unsigned char byte;
-    //Per evitare ambiguità si è deciso di "creare" byte, di fatto un char corrisponde a un byte.
+//Per evitare ambiguità si è deciso di "creare" byte, di fatto un char corrisponde a un byte.
 #endif //OSPROJECT_BYTETYPE_H

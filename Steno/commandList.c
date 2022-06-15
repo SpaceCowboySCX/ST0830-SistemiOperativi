@@ -35,25 +35,25 @@ void createTXT(){
         perror("Error: don't try to declare a txt file with another extension.\n");
 }
 
-void printTXT(){
-    FILE *fileToPrint;
-    char string[MAX_LENGTH_STRING], characterToPrint;
-
-    printf("Name's file:\t");
-    scanf("%s", string);
-
-    //TODO check if exist
-    if(extensionFileCheck(string) != 1) {
-        fileToPrint = fopen(string, "r");
-        characterToPrint = fgetc(fileToPrint);
-
-        while(characterToPrint != EOF) {
-            printf("%c", characterToPrint);
-            characterToPrint = fgetc(fileToPrint);
-        }
-        fclose(fileToPrint);
-    }
-}
+//void printTXT(){
+//    FILE *fileToPrint;
+//    char string[MAX_LENGTH_STRING], characterToPrint;
+//
+//    printf("Name's file:\t");
+//    scanf("%s", string);
+//
+//    //TODO check if exist
+//    if(extensionFileCheck(string) != 1) {
+//        fileToPrint = fopen(string, "r");
+//        characterToPrint = fgetc(fileToPrint);
+//
+//        while(characterToPrint != EOF) {
+//            printf("%c", characterToPrint);
+//            characterToPrint = fgetc(fileToPrint);
+//        }
+//        fclose(fileToPrint);
+//    }
+//}
 
 
 void currentPath(){
