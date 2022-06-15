@@ -56,14 +56,14 @@
      * @return
      */
     int isDirectoryExist(const char *path);
-    /**
-    * This method split an string.
-    * @param string
-    *                  the name of file to check.
-    * @return
-    *                  firstElement on the list
-    */
-    Node* split(char str[]);
+//    /**
+//    * This method split an string.
+//    * @param string
+//    *                  the name of file to check.
+//    * @return
+//    *                  firstElement on the list
+//    */
+//    Node* split(char str[]);
 
 //    /**
 //    * This method count token in an string .

@@ -47,18 +47,18 @@ int isDirectoryExist(const char *path){
     return stat(path, &sb) == 0 && S_ISDIR(sb.st_mode);
 }
 
-Node* split(char str[]) {
-    char* token = strtok(str, " ");
-    char string[MAX_LENGTH_STRING];
-    strcpy(string, token);
-    insert(string);
-    while((token = strtok(NULL," ") )!= NULL)
-    {
-        strcpy(string, token);
-        insert(string);
-    }
-    return getFirstElement();
-}
+//Node* split(char str[]) {
+//    char* token = strtok(str, " ");
+//    char string[MAX_LENGTH_STRING];
+//    strcpy(string, token);
+//    insert(string);
+//    while((token = strtok(NULL," ") )!= NULL)
+//    {
+//        strcpy(string, token);
+//        insert(string);
+//    }
+//    return getFirstElement();
+//}
 //ESEMPIO DI COME UTILIZARE UNA LISTA
 //char str[]= "dijnfids djfndsjfnijd ";
 //Node* lista = split(str);
