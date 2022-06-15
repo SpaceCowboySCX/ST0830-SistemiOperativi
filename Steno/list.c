@@ -3,7 +3,7 @@
 Node *first_element;
 Node *last_element;
 
-void insert(char string_to_insert[MAX_LENGTH_STRING])
+Node* insert(char string_to_insert[MAX_LENGTH_STRING])
 {
     if(last_element == NULL)
     {
@@ -19,6 +19,12 @@ void insert(char string_to_insert[MAX_LENGTH_STRING])
         if(first_element->next == NULL)first_element->next = last_element;
         last_element = last_element->next;
     }
+    return first_element;
+}
+
+Node* getFirstElement()
+{
+    return first_element;
 }
 
 char* readAndRemove()
@@ -33,3 +39,21 @@ char* readAndRemove()
     }
     return NULL;
 }
+
+Node* getNext(Node* element)
+{
+    return element->next;
+}
+
+char* getStringOfElement(Node* element)
+{
+    return element->str;
+}
+
+Node* getLastElement()
+{
+    return last_element;
+}
+
+
+
