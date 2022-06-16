@@ -4,14 +4,14 @@
 #include "byteType.h"
 #include "stdlib.h"
 
-struct Node{
+struct Node {
     char str[MAX_LENGTH_STRING];
     struct Node *next;
 } typedef Node;
 
 void insert(char array[]);
 
-char* readAndRemove();
+char *readAndRemove();
 
 //split: return un puntatore di stringhe
 //da un input separa le varie stringhe, a ogni spazio incontrato separa
