@@ -1,10 +1,6 @@
 #ifndef OSPROJECT_UTILITIES_H
 #define OSPROJECT_UTILITIES_H
 
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/stat.h>
 #include "byteType.h"
 
 #define MAX_PATH 200
@@ -50,14 +46,22 @@ int readNextByte(byte *B, FILE *f);
  */
 int extensionFileCheck(char string[MAX_LENGTH_STRING]);
 
-    /**
-     * This method check that path exist.
-     * @param path
-     * @return
-     */
-    int isDirectoryExist(const char *path);
+/**
+ * This method take in input a file name to return.
+ * @return
+ *          a file name;
+ */
+char *inputNameFile(int state);
+
+/**
+ * This method bring in input the element of List
+ * @return
+ *                  firstElement of list.
+ */
+Node * insertByInput();
+
 //    /**
-//    * This method split an string.
+//    * This method split a string.
 //    * @param string
 //    *                  the name of file to check.
 //    * @return
@@ -66,9 +70,9 @@ int extensionFileCheck(char string[MAX_LENGTH_STRING]);
 //    Node* split(char str[]);
 
 //    /**
-//    * This method count token in an string .
+//    * This method count token in a string .
 //    * @param string
-//    *                  string for the count token.
+//    *                   for the count token.
 //    * @return
 //    *                  count of token in this string.
 //    */

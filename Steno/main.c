@@ -1,11 +1,59 @@
 #include "commandList.h"
-
+#define PAUSE getchar();getchar();
 int main() {
 
-    int choice;
+    char a[MAX_LENGTH_STRING], b[MAX_LENGTH_STRING];
+    Node* list = insertByInput(1);
+    printList(list);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    int choice = 0;
     do {
+        if(choice != 0)
+            PAUSE
         help();
+        fflush(stdin);
         scanf("%d", &choice);
+        system("clear");
         switch (choice) {
             case 1:
                 currentPath();
@@ -33,10 +81,8 @@ int main() {
                 terminate();
                 break;
             default:
-                printf("Command not found.\n\n");
+                perror("Command not found.\n");
                 break;
         }
     } while (choice != 0);
-
-    return 0;
-}
+*/

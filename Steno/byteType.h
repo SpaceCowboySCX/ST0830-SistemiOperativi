@@ -4,6 +4,7 @@
 #define MAX_LENGTH_STRING 30
 
 #include <stdio.h>
+#include "list.h"
 #include <string.h>
 
 typedef unsigned char byte;

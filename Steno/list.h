@@ -10,7 +10,6 @@ struct Node{
     struct Node *next;
 } typedef Node;
 
-
 /**
 * This method put an element string on list.
 * @param first_element

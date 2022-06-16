@@ -1,0 +1,6 @@
+#ifndef ST0830_O_S_PROJECT_MANAGEFILE_H
+#define ST0830_O_S_PROJECT_MANAGEFILE_H
+
+#include "utilities.h"
+
+#endif //ST0830_O_S_PROJECT_MANAGEFILE_H

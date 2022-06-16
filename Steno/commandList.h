@@ -1,8 +1,11 @@
 #ifndef ST0830_O_S_PROJECT_COMMANDLIST_H
 #define ST0830_O_S_PROJECT_COMMANDLIST_H
 
-#include "stenography.h"
+#include "utilities.h"
+#include <unistd.h>
 #include <dirent.h>
+#include <sys/stat.h>
+#include "stenography.h"
 
 /**
  * This method explain the command for the line command interface.
@@ -39,19 +42,13 @@ void createTXT(char *name_file);
 void printTXT(char *name_file);
 
 /**
- * This method take in input a file name to return.
- * @return
- */
-char *inputNameFile(int state);
-
-/**
  * This method read file and execute the algorithm for Hiding.
  * @param nome_file_txt
  * @param nome_file_immagine
  * @return  0 - success
  *          1 - fail
  */
-int executeHiding(char name_file_txt[MAX_LENGTH_STRING], char name_file_immagine[MAX_LENGTH_STRING]);
+int executeHiding(Node *list);
 
 /**
  * This method read file and execute the algorithm for unveiling.
@@ -59,8 +56,14 @@ int executeHiding(char name_file_txt[MAX_LENGTH_STRING], char name_file_immagine
  * @return  0 - success
  *          1 - fail
  */
-int executeUnveiling(char name_file_immagine[MAX_LENGTH_STRING]);
+int executeUnveiling(Node *list);
 
+/**
+ * This method check that path exist.
+ * @param path
+ * @return
+ */
+int isDirectoryExist(const char *path);
 /**
  * This method terminate the program execution.
  */

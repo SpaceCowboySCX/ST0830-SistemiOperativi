@@ -1,31 +1,5 @@
 #include "utilities.h"
 
-long getFileLength(FILE *f) {
-    fseek(f, 0, SEEK_END);
-    long length = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    return length;
-}
-
-void setFileOffset(FILE *f, long offset) {
-    fseek(f, offset, SEEK_SET);
-}
-
-int fileErrorCheck(FILE *f) {
-    if (ferror(f)) {
-        perror("Error during file operation.");
-        return 1;
-    }
-    return 0;
-}
-
-int readNextByte(byte *B, FILE *f) {
-    if (fread(B, sizeof(unsigned char), 1, f) == 0)
-        return -1;
-
-    return fileErrorCheck(f);
-}
-
 int extensionFileCheck(char string[MAX_LENGTH_STRING]) {
     //Una stringa con meno di cinque caratteri sicuramente non contiene il nome con l'estensione inclusa
     if (strlen(string) >= 5) {
@@ -35,47 +9,48 @@ int extensionFileCheck(char string[MAX_LENGTH_STRING]) {
         else if (strcmp(extension, ".bmp") == 0)
             return -1;
     }
-
     return 0;
 }
 
-int isDirectoryExist(const char *path){
-    if(strlen(path) < MAX_PATH)
-        return 0;
+char *inputNameFile(int state) {
+    static char file_name[MAX_LENGTH_STRING];
+    do {
+        printf("\t!Attention!\nYou must enter the extension at the end of name's file.\n");
+        printf("Name's file:\t");
+        scanf("%s", file_name);
 
-    struct stat sb;
-    return stat(path, &sb) == 0 && S_ISDIR(sb.st_mode);
+        if (extensionFileCheck(file_name) == state)
+            return file_name;
+        else if (state == 1)
+            perror("\nIt's not txt file.\n");
+        else if (state == -1)
+            perror("\nIt's not bmp file.\n");
+        else
+            perror("\nThe extension file it's not accepted.\n");
+    } while (1);
 }
 
-//Node* split(char str[]) {
-//    char* token = strtok(str, " ");
-//    char string[MAX_LENGTH_STRING];
-//    strcpy(string, token);
-//    insert(string);
-//    while((token = strtok(NULL," ") )!= NULL)
-//    {
-//        strcpy(string, token);
-//        insert(string);
-//    }
-//    return getFirstElement();
-//}
-//ESEMPIO DI COME UTILIZARE UNA LISTA
-//char str[]= "dijnfids djfndsjfnijd ";
-//Node* lista = split(str);
-//
-//printf("Stampa: %s", getStringOfElement(lista));
-//while(getNext(lista) != NULL)
-//{
-//lista = getNext(lista);
-//printf("Stampa: %s", getStringOfElement(lista));
-//}
+Node *insertByInput(int isHiding) {
+    Node *list = NULL;
+    char name_file_txt[MAX_LENGTH_STRING] = "";
+    char name_file_bmp[MAX_LENGTH_STRING];
 
-//int getNumberToken(char str[])
-//{
-//    int count = 0;
-//    while(strtok(str, " "))
-//    {
-//        count++;
-//    }
-//    return count;
-//}
+    int number_of_file;
+    do {
+        printf("How many File? MAX 10\n");
+        scanf("%d", &number_of_file);
+    } while (number_of_file <= 0 || number_of_file > 10);
+
+    for (int i = 0; i < number_of_file; i++) {
+        if (isHiding) {
+            printf("\tInsert the .txt file.\n");
+            strcpy(name_file_txt, inputNameFile(1));
+        }
+
+        printf("\tInsert the .bmp file.\n");
+        strcpy(name_file_bmp, inputNameFile(-1));
+        list = insert(list, name_file_txt, name_file_bmp);
+    }
+
+    return list;
+}

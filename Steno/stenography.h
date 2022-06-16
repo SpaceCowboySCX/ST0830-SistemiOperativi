@@ -1,8 +1,8 @@
 #ifndef ST0830_O_S_PROJECT_STENOGRAPHY_H
 #define ST0830_O_S_PROJECT_STENOGRAPHY_H
 
-#include <bits/types/FILE.h>
-#include "utilities.h"
+#include "manageFile.h"
+#include "byteType.h"
 
 /**
  * This method hides a text file within an image.
@@ -12,7 +12,8 @@
  * @param img
  * @return
  */
-int hiding(FILE *file_img, FILE *file_txt, FILE *file_img_output);
+int hiding(
+        FILE *file_img, FILE *file_txt, FILE *file_img_output);
 
 /**
  * This method write a byte to skip.

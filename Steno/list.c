@@ -1,4 +1,3 @@
-#include "list.h"
 
 Node *insert(Node *first_element, char name_file_txt[], char name_file_bmp[]) {
     if (first_element == NULL) {
@@ -19,16 +18,15 @@ Node *insert(Node *first_element, char name_file_txt[], char name_file_bmp[]) {
 }
 
 char *getNameFileTxt(Node *first_element) {
-    if (first_element != NULL) {
+    if (first_element != NULL)
         return first_element->name_file_txt;
-    }
+
     return NULL;
 }
 
 char *getNameFileBmp(Node *first_element) {
-    if (first_element != NULL) {
+    if (first_element != NULL)
         return first_element->name_file_bmp;
-    }
     return NULL;
 }
 
@@ -46,20 +44,24 @@ Node *getNext(Node *element) {
 
 Node *getLastElement(Node *first_element) {
     Node *tmp = first_element;
-    while (tmp->next != NULL) {
+    while (tmp->next != NULL)
         tmp = tmp->next;
-    }
+
     return tmp;
 }
 
 void printList(Node *element) {
     if (element == NULL)
         return;
-    printf("\nStampo: %s", getNameFileTxt(element));
-    printf("\nStampo: %s", getNameFileBmp(element));
+    if(strcmp(getNameFileTxt(element), "") != 0)
+        printf("\nTXT:\t%s", getNameFileTxt(element));
+
+    printf("\nBMP:\t%s", getNameFileBmp(element));
+    printf("\n--------------------------------");
     if (getNext(element) != NULL)
         printList(getNext(element));
 }
+
 //ESEMPIO USO LISTA
 //    Node* list = NULL;
 //    list = insert(list, "1", "2");

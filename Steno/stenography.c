@@ -46,6 +46,7 @@ int hiding(FILE* file_img, FILE* file_txt, FILE* file_img_output){
             fprintf(file_img_output, "%c", copy_of_byte_img);
         }
     }
+    return 0;
 }
 
 void toSkip(FILE* file_img, FILE* file_img_output){
