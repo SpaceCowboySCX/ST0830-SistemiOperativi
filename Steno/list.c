@@ -48,8 +48,7 @@ char* getNameFileBmp(Node* first_element)
 
 Node* removeElement(Node* first_element)
 {
-    if(first_element != NULL)
-    {
+    if(first_element != NULL){
         first_element = first_element->next;
         return first_element;
     }
@@ -71,6 +70,16 @@ Node* getLastElement(Node* first_element)
         tmp = tmp->next;
     }
     return tmp;
+}
+
+void printList(Node *element)
+{
+    if(element ==NULL)
+        return;
+    printf("\nStampo: %s", getNameFileTxt(element));
+    printf("\nStampo: %s", getNameFileBmp(element));
+    if(getNext(element) != NULL)
+        printList(getNext(element));
 }
 //ESEMPIO USO LISTA
 //    Node* list = NULL;

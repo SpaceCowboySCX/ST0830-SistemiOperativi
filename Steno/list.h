@@ -73,4 +73,11 @@ char* getNameFileBmp(Node* element);
  */
 Node* getLastElement(Node* first_element);
 
+/**
+ * This method print all the list.
+ * @param first_element
+ *                  first element of the list.
+ */
+void printList(Node *first_element);
+
 #endif //ST0830_O_S_PROJECT_LIST_H
