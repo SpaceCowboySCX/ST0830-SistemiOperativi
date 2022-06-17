@@ -2,9 +2,7 @@
 #include "utilities.h"
 #include <unistd.h>
 #include <dirent.h>
-#include <stdlib.h>
 #include <string.h>
-#include "byteType.h"
 #include "stenography.h"
 
 void help() {
@@ -87,7 +85,7 @@ int executeHiding(Node *list) {
     strcpy(name_file_output, getNameFileTxt(list));
     name_file_output[strlen(getNameFileTxt(list)) - 4] = '\0';
     strcat(name_file_output, ".bmp");
-    file_output = fopen(name_file_output, "wb");
+    //file_output = fopen(name_file_output, "wb");
 /*
     //Creo una copia byte a byte dell'immagine originale
     for (int index = 0; index < length_of_output; index++) {
@@ -96,7 +94,7 @@ int executeHiding(Node *list) {
         fwrite(&B, 1, sizeof(byte), file_output);
     }
 */
-    hiding(file_img, file_txt, file_output);
+    hiding(file_img, file_txt, name_file_output);
     return 0;
 }
 
