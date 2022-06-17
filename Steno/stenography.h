@@ -12,7 +12,7 @@
  * @return
  */
 int hiding(
-        FILE *file_img, FILE *file_txt, FILE *file_img_output);
+        char *file_img, char *file_txt, char *file_img_output);
 
 /**
  * This method write a byte to skip.
@@ -29,7 +29,7 @@ void toSkip(FILE *file_img, FILE *file_img_output);
  * @param img
  * @return
  */
-int unveiling(FILE *file_img, FILE *file_txt_output);
+int unveiling(char *file_img, char *file_txt_output);
 
 int lengthFileCheck(FILE *file_img, FILE *file_txt);
 
