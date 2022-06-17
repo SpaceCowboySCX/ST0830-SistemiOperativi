@@ -7,6 +7,7 @@
 #include <sys/stat.h>
 #include "stenography.h"
 
+#define PAUSE getchar();getchar();break;
 /**
  * This method explain the command for the line command interface.
  */
@@ -58,12 +59,6 @@ int executeHiding(Node *list);
  */
 int executeUnveiling(Node *list);
 
-/**
- * This method check that path exist.
- * @param path
- * @return
- */
-int isDirectoryExist(const char *path);
 /**
  * This method terminate the program execution.
  */

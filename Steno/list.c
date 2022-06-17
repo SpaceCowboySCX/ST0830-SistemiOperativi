@@ -1,4 +1,4 @@
-
+#include "list.h"
 Node *insert(Node *first_element, char name_file_txt[], char name_file_bmp[]) {
     if (first_element == NULL) {
         first_element = (Node *) malloc(sizeof(Node));

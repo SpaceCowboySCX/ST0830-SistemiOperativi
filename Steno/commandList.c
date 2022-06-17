@@ -1,5 +1,6 @@
 
 #include "commandList.h"
+
 void help() {
     printf("Type 1) currentPath:\tShow the path of current directory.\n");
     printf("Type 2) showContent:\tShow the content of current directory.\n");
@@ -19,7 +20,7 @@ void currentPath() {
         perror("Error: getcwd() error.\n");
 }
 
-int showContent(){
+int showContent() {
     DIR *directory;
     struct dirent *entry;
     int number_of_files = 0;
@@ -40,6 +41,7 @@ int showContent(){
 int changeDirectory() {
     char path[MAX_PATH];
     printf("Insert path:\t");
+    fflush(stdin);
     scanf("%s", path);
     return chdir(path);
 }
@@ -66,6 +68,8 @@ int executeHiding(Node *list) {
     if (length_of_output == -1)
         return 1;
 
+    //removeElement(list);
+
     //Creo la stringa, ovvero il nome del file di output.
     //Avrà lo stesso nome del file txt, modifico la stringa sostituendo l'estensione del file.
     char name_file_output[MAX_PATH];
@@ -80,14 +84,12 @@ int executeHiding(Node *list) {
         fread(&B, 1, sizeof(byte), file_img);
         fwrite(&B, 1, sizeof(byte), file_output);
     }
-
     hiding(file_img, file_txt, file_output);
     return 0;
 }
 
 int executeUnveiling(Node *list) {
-    FILE *file_img = fopen(getNameFileBmp(list)
-            , "rb");
+    FILE *file_img = fopen(getNameFileBmp(list), "rb");
     FILE *file_output;
     if (file_img == NULL) {
         printf("The image input file is not present in the current directory.\n");
@@ -97,23 +99,16 @@ int executeUnveiling(Node *list) {
     //Creo la stringa, ovvero il nome del file di output.
     //Avrà lo stesso nome del file bmp, modifico la stringa sostituendo l'estensione del file.
     char name_file_output[MAX_PATH];
-    strcpy(name_file_output, getNameFileBmp(list)
-    );
-    name_file_output[strlen(getNameFileBmp(list)
-    ) - 4] = '\0';
+    strcpy(name_file_output, getNameFileBmp(list));
+
+    name_file_output[strlen(getNameFileBmp(list)) - 4] = '\0';
+
     strcat(name_file_output, ".txt");
+
     file_output = fopen(name_file_output, "wb");
 
     unveiling(file_img, file_output);
     return 0;
-}
-
-int isDirectoryExist(const char *path) {
-    if (strlen(path) < MAX_PATH)
-        return 0;
-
-    struct stat sb;
-    return stat(path, &sb) == 0 && S_ISDIR(sb.st_mode);
 }
 
 void terminate() {
