@@ -1,5 +1,8 @@
 #include "utilities.h"
 
+#include <stdio.h>
+#include <string.h>
+
 int extensionFileCheck(char string[MAX_LENGTH_STRING]) {
     //Una stringa con meno di cinque caratteri sicuramente non contiene il nome con l'estensione inclusa
     if (strlen(string) >= 5) {

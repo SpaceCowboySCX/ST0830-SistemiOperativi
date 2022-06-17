@@ -1,29 +1,32 @@
 #include "manageFile.h"
+#include "byteType.h"
+#include "utilities.h"
+#include <stdio.h>
 
-long getFileLength(FILE *f) {
-    fseek(f, 0, SEEK_END);
-    long length = ftell(f);
-    fseek(f, 0, SEEK_SET);
+long getFileLength(FILE *file) {
+    fseek(file, 0, SEEK_END);
+    long length = ftell(file);
+    fseek(file, 0, SEEK_SET);
     return length;
 }
 
-void setFileOffset(FILE *f, long offset) {
-    fseek(f, offset, SEEK_SET);
+void setFileOffset(FILE *file, long offset) {
+    fseek(file, offset, SEEK_SET);
 }
 
-int fileErrorCheck(FILE *f) {
-    if (ferror(f)) {
+int fileErrorCheck(FILE *file) {
+    if (ferror(file)) {
         perror("Error during file operation.");
         return 1;
     }
     return 0;
 }
 
-int readNextByte(byte *B, FILE *f) {
-    if (fread(B, sizeof(unsigned char), 1, f) == 0)
+int readNextByte(byte *B, FILE *file) {
+    if (fread(B, sizeof(unsigned char), 1, file) == 0)
         return -1;
 
-    return fileErrorCheck(f);
+    return fileErrorCheck(file);
 }
 
 

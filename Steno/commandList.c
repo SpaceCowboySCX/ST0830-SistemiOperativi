@@ -1,5 +1,11 @@
-
 #include "commandList.h"
+#include "utilities.h"
+#include <unistd.h>
+#include <dirent.h>
+#include <stdlib.h>
+#include <string.h>
+#include "byteType.h"
+#include "stenography.h"
 
 void help() {
     printf("Type 1) currentPath:\tShow the path of current directory.\n");

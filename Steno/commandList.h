@@ -1,12 +1,7 @@
 #ifndef ST0830_O_S_PROJECT_COMMANDLIST_H
 #define ST0830_O_S_PROJECT_COMMANDLIST_H
 
-#include "utilities.h"
-#include <unistd.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include "stenography.h"
-
+#include "list.h"
 #define PAUSE getchar();getchar();break;
 /**
  * This method explain the command for the line command interface.

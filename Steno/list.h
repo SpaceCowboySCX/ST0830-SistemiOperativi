@@ -1,8 +1,8 @@
 #ifndef ST0830_O_S_PROJECT_LIST_H
 #define ST0830_O_S_PROJECT_LIST_H
 
-#include "byteType.h"
-#include "stdlib.h"
+//Costante globale per la lunghezza delle stringhe
+#define MAX_LENGTH_STRING 30
 
 struct Node{
     char name_file_txt[MAX_LENGTH_STRING];

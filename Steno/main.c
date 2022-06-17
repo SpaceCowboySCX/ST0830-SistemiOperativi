@@ -1,4 +1,9 @@
+#include <stdlib.h>
 #include "commandList.h"
+#include <stdio.h>
+#include "utilities.h"
+#define PAUSE getchar();getchar();break;
+
 int main() {
     int choice = 0;
     Node *l = NULL;
