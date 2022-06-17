@@ -37,8 +37,7 @@ int main() {
                 executeUnveiling(l);
                 PAUSE
             case 0:
-                terminate();
-                PAUSE
+                return 0;
             default:
                 perror("Command not found.\n");
                 PAUSE

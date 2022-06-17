@@ -5,6 +5,10 @@
 
 int extensionFileCheck(char string[MAX_LENGTH_STRING]) {
     //Una stringa con meno di cinque caratteri sicuramente non contiene il nome con l'estensione inclusa
+    if(string == NULL){
+        perror("You can't insert a null name of file.\n");
+        return 0;
+    }
     if (strlen(string) >= 5) {
         const char *extension = &string[strlen(string) - 4];
         if (strcmp(extension, ".txt") == 0 || strcmp(extension, ".TXT") == 0)
