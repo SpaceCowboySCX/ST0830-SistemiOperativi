@@ -2,21 +2,10 @@
 #include "commandList.h"
 #include <stdio.h>
 #include "utilities.h"
-#include "stenography.h"
 
 #define PAUSE getchar();getchar();break;
 
 int main() {
-    int a = 0;
-    hiding("/home/spacecowboys01/CLionProjects/ST0830-O.S.Project/test/input_img.bmp",
-           "/home/spacecowboys01/CLionProjects/ST0830-O.S.Project/test/input_text.txt",
-           "/home/spacecowboys01/CLionProjects/ST0830-O.S.Project/test/qw.bmp");
-
-    unveiling("/home/spacecowboys01/CLionProjects/ST0830-O.S.Project/test/qw.bmp",
-              "/home/spacecowboys01/CLionProjects/ST0830-O.S.Project/test/qw.txt");
-
-    printTXT("/home/spacecowboys01/CLionProjects/ST0830-O.S.Project/test/qw.txt");
-   /*
     int choice = 0;
     Node *l = NULL;
     do {
@@ -55,7 +44,6 @@ int main() {
                 PAUSE
         }
     } while (choice != 0);
-     */
 }
 
 
