@@ -52,7 +52,7 @@ void executeHiding(Node *list);
  * @return  0 - success
  *          1 - fail
  */
-int executeUnveiling(Node *list);
+void executeUnveiling(Node *list);
 
 /**
  * This method terminate the program execution.

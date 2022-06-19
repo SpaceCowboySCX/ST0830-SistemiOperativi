@@ -12,7 +12,7 @@
  * @param img
  * @return
  */
-void *hiding(Node* list);
+void *hiding(void* list);
 
 /**
  * This method write a byte to skip.
@@ -29,7 +29,7 @@ void toSkip(FILE *file_img, FILE *file_img_output);
  * @param img
  * @return
  */
-void unveiling(char *file_img, char *file_txt_output);
+void* unveiling(void* list);
 
 int lengthFileCheck(FILE *file_img, FILE *file_txt);
 

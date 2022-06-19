@@ -54,77 +54,40 @@ int changeDirectory() {
 void executeHiding(Node *list) {
     if(list == NULL)
         return;
-//    FILE *file_txt;
-//    FILE *file_output;
-//    FILE *file_img = fopen(getNameFileBmp(list), "rb");
     char *file_txt = getNameFileTxt(list);
     char *file_img = getNameFileBmp(list);
 
     char *file_output;
-    {
-        /*
-        //Controllo i nomi dei file
-        if (file_img == NULL) {
-            printf("The image input file is not present in the current directory.\n");
-            return 1;
-        }
-    //    if (getNameFileTxt(list) == NULL)
-    //        file_txt = stdin;
-    //    else
-    //        file_txt = fopen(getNameFileTxt(list), "rb");
-        if(file_txt == NULL)
-    //
-    //    int length_of_output = lengthFileCheck(file_img, file_txt);
-    //    fseek(file_txt, 0, SEEK_SET);
-    //    fseek(file_img, 0, SEEK_SET);
-    //
-    //    if (length_of_output == -1)
-    //        return 1;
-    //
-         */
-        //removeElement(list);
-    }
     //Creo la stringa, ovvero il nome del file di output.
     //Avrà lo stesso nome del file txt, modifico la stringa sostituendo l'estensione del file.
     char name_file_output[MAX_LENGTH_STRING];
     strcpy(name_file_output, getNameFileTxt(list));
     name_file_output[strlen(getNameFileTxt(list)) - 4] = '\0';
     strcat(name_file_output, ".bmp");
-    //file_output = fopen(name_file_output, "wb");
+
     strcpy(list->name_file_generate, name_file_output);
-/*
-    //Creo una copia byte a byte dell'immagine originale
-    for (int index = 0; index < length_of_output; index++) {
-        byte B;
-        fread(&B, 1, sizeof(byte), file_img);
-        fwrite(&B, 1, sizeof(byte), file_output);
-    }
-*/
-    createThread(list);
-    //hiding(list);
+    //void* list_casted = list;
+    createThreadHiding((void*) list);
 
     executeHiding (removeElement(list));
-    //return 0;
+
 }
 
 
-int executeUnveiling(Node *list) {
-    {
-//    FILE *file_img = fopen(getNameFileBmp(list), "rb");
-//    FILE *file_output;
-//    if (file_img == NULL) {
-//        printf("The image input file is not present in the current directory.\n");
-//        return 1;
-//    }
-    }
+void executeUnveiling(Node *list) {
+
     //Creo la stringa, ovvero il nome del file di output.
     //Avrà lo stesso nome del file bmp, modifico la stringa sostituendo l'estensione del file.
+    if(list == NULL)
+        return;
     char name_file_output[MAX_PATH];
     strcpy(name_file_output, getNameFileBmp(list));
     name_file_output[strlen(getNameFileBmp(list)) - 4] = '\0';
     strcat(name_file_output, ".txt");
-    //file_output = fopen(name_file_output, "ab");
+    strcpy(list->name_file_generate, name_file_output);
 
-    unveiling(getNameFileBmp(list), name_file_output);
-    return 0;
+
+    createThreadUnveiling((void*) list);
+    executeUnveiling(removeElement(list));
+
 }
