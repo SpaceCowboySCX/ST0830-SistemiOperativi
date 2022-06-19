@@ -4,7 +4,7 @@ project(ST0830_O_S_Project C)
 set(CMAKE_C_STANDARD 11)
 
 include_directories(Steno)
-
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
 add_executable(ST0830_O_S_Project
             Steno/byteType.h
             Steno/main.c

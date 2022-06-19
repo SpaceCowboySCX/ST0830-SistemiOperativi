@@ -1,5 +1,4 @@
 #include "manageFile.h"
-#include "byteType.h"
 #include "utilities.h"
 #include <stdio.h>
 
@@ -21,14 +20,6 @@ int fileErrorCheck(FILE *file) {
     }
     return 0;
 }
-
-int readNextByte(byte *B, FILE *file) {
-    if (fread(B, sizeof(unsigned char), 1, file) == 0)
-        return -1;
-
-    return fileErrorCheck(file);
-}
-
 
 void createTXT(char *file_name) {
     fclose(fopen(file_name, "at"));

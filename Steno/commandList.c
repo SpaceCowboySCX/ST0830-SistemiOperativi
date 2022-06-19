@@ -54,10 +54,7 @@ int changeDirectory() {
 void executeHiding(Node *list) {
     if(list == NULL)
         return;
-    char *file_txt = getNameFileTxt(list);
-    char *file_img = getNameFileBmp(list);
 
-    char *file_output;
     //Creo la stringa, ovvero il nome del file di output.
     //Avrà lo stesso nome del file txt, modifico la stringa sostituendo l'estensione del file.
     char name_file_output[MAX_LENGTH_STRING];
@@ -66,11 +63,9 @@ void executeHiding(Node *list) {
     strcat(name_file_output, ".bmp");
 
     strcpy(list->name_file_generate, name_file_output);
-    //void* list_casted = list;
     createThreadHiding((void*) list);
 
     executeHiding (removeElement(list));
-
 }
 
 

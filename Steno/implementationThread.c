@@ -1,5 +1,6 @@
 #include "implementationThread.h"
 #include "stenography.h"
+#include <pthread.h>
 
 pthread_t threadId[10];
 int i = 0;

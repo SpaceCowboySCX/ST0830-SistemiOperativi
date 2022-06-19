@@ -26,16 +26,6 @@ void setFileOffset(FILE *f, long offset);
 int fileErrorCheck(FILE *f);
 
 /**
- * This method reads the next byte if possible.
- * @param B as actual Byte.
- * @param f as File.
- * @return -1 if it can't read another byte because B is last.
- *         0 if it don't find an error.
- *         1 else.
- */
-int readNextByte(byte *B, FILE *f);
-
-/**
  * This method create a .txt file in the current path.
  * @param file_name
  */

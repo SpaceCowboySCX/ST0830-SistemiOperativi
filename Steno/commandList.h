@@ -39,21 +39,20 @@ void printTXT(char *name_file);
 
 /**
  * This method read file and execute the algorithm for Hiding.
- * @param nome_file_txt
- * @param nome_file_immagine
- * @return  0 - success
- *          1 - fail
+ * @param Node
+ *                  pass a list.
+ * @return
  */
 void executeHiding(Node *list);
 
 /**
  * This method read file and execute the algorithm for unveiling.
- * @param nome_file_immagine
- * @return  0 - success
- *          1 - fail
+ * @param Node
+ *                  pass a list.
+ * @return
  */
 void executeUnveiling(Node *list);
-
+//TODO polish
 /**
  * This method terminate the program execution.
  */

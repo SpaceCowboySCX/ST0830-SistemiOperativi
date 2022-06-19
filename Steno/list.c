@@ -65,21 +65,3 @@ void printList(Node *element) {
     if (getNext(element) != NULL)
         printList(getNext(element));
 }
-
-//ESEMPIO USO LISTA
-//    Node* list = NULL;
-//    list = insert(list, "1", "2");
-//    list = insert(list, "3", "4");
-//    list = insert(list, "5", "6");
-//    list = insert(list, "7", "8");
-//
-//    while(list != NULL)
-//    {
-//        printf("\nStampo: %s", getNameFileTxt(list));
-//        printf("\nStampo: %s", getNameFileBmp(list));
-//        printf("\n-----------------------------------------------------------------");
-//        list = removeElement(list);
-//    }
-
-
-

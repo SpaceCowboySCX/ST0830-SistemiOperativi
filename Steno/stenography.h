@@ -31,6 +31,7 @@ void toSkip(FILE *file_img, FILE *file_img_output);
  */
 void* unveiling(void* list);
 
+//TODO polish
 int lengthFileCheck(FILE *file_img, FILE *file_txt);
 
 #endif //ST0830_O_S_PROJECT_STENOGRAPHY_H

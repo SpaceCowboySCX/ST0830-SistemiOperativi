@@ -28,6 +28,6 @@ char *inputNameFile(int state);
  * @return
  *                  firstElement of list.
  */
-Node * insertByInput();
+Node * insertByInput(int isHiding);
 
 #endif //OSPROJECT_UTILITIES_H

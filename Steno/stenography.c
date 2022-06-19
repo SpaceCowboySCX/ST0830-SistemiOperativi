@@ -1,3 +1,4 @@
+#include <string.h>
 #include "stenography.h"
 #include "manageFile.h"
 #include "byteType.h"
