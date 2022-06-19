@@ -9,6 +9,8 @@ void*  hiding(void* list) {
 
     FILE *file_img = fopen(list_casted->name_file_bmp, "rb");
     FILE *file_txt = fopen(list_casted->name_file_txt, "rb");
+//    char st[MAX_LENGTH_STRING];
+//    strcpy(list_casted->name_file_generate,"lala");
     FILE *file_img_output = fopen(list_casted->name_file_generate, "ab");
 
     byte byte_img;

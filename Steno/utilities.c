@@ -37,7 +37,7 @@ char *inputNameFile(int state) {
             perror("\nThe extension file it's not accepted.\n");
     } while (1);
 }
-
+//TODO questa funzione non funziona va rivista, genera un segnale 11
 Node *insertByInput(int isHiding) {
     Node *list = NULL;
     char name_file_txt[MAX_LENGTH_STRING] = "";
