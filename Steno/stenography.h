@@ -2,6 +2,7 @@
 #define ST0830_O_S_PROJECT_STENOGRAPHY_H
 
 #include <stdio.h>
+#include "list.h"
 
 /**
  * This method hides a text file within an image.
@@ -11,8 +12,7 @@
  * @param img
  * @return
  */
-int hiding(
-        char *file_img, char *file_txt, char *file_img_output);
+void *hiding(Node* list);
 
 /**
  * This method write a byte to skip.
@@ -29,7 +29,7 @@ void toSkip(FILE *file_img, FILE *file_img_output);
  * @param img
  * @return
  */
-int unveiling(char *file_img, char *file_txt_output);
+void unveiling(char *file_img, char *file_txt_output);
 
 int lengthFileCheck(FILE *file_img, FILE *file_txt);
 

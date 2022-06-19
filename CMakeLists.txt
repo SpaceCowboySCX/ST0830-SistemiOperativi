@@ -11,4 +11,7 @@ add_executable(ST0830_O_S_Project
             Steno/utilities.c Steno/utilities.h
             Steno/commandList.h Steno/commandList.c
             Steno/stenography.c Steno/stenography.h
-            Steno/list.c Steno/list.h Steno/manageFile.c Steno/manageFile.h)
+            Steno/list.c Steno/list.h
+            Steno/manageFile.c Steno/manageFile.h
+            Steno/implementationThread.c Steno/implementationThread.h
+            )

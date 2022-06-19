@@ -1,11 +1,13 @@
 #include "stenography.h"
 #include "manageFile.h"
 #include "byteType.h"
+#include "list.h"
 
-int hiding(char *file_img_dot, char *file_txt_dot, char *file_img_output_dot) {
-    FILE *file_img = fopen(file_img_dot, "rb");
-    FILE *file_txt = fopen(file_txt_dot, "rb");
-    FILE *file_img_output = fopen(file_img_output_dot, "ab");
+void*  hiding(Node* list) {
+   // list = (Node*)list;
+    FILE *file_img = fopen(list->name_file_bmp, "rb");
+    FILE *file_txt = fopen(list->name_file_txt, "rb");
+    FILE *file_img_output = fopen(list->name_file_generate, "ab");
 
     //TODO vedere se farlo sotto forma di puntatore
     byte byte_img;
@@ -68,7 +70,9 @@ int hiding(char *file_img_dot, char *file_txt_dot, char *file_img_output_dot) {
     fclose(file_img);
     fclose(file_img_output);
     fclose(file_txt);
-    return 0;
+    //return 0;
+
+    return NULL;
 }
 
 void toSkip(FILE *file_img, FILE *file_img_output) {
@@ -79,7 +83,7 @@ void toSkip(FILE *file_img, FILE *file_img_output) {
     fwrite(&to_skip, sizeof(byte), 1, file_img_output);
 }
 
-int unveiling(char *file_img_dot, char *file_txt_output_dot) {
+void unveiling(char *file_img_dot, char *file_txt_output_dot) {
     FILE *file_img = fopen(file_img_dot, "rb");
     FILE *file_txt_output = fopen(file_txt_output_dot, "w");
     byte byte_img = 0x00;
@@ -112,7 +116,7 @@ int unveiling(char *file_img_dot, char *file_txt_output_dot) {
     }
     fclose(file_img);
     fclose(file_txt_output);
-    return 0;
+    //return 0;
 }
 
 int lengthFileCheck(FILE *file_img, FILE *file_txt) {

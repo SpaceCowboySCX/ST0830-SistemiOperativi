@@ -7,6 +7,7 @@
 struct Node{
     char name_file_txt[MAX_LENGTH_STRING];
     char name_file_bmp[MAX_LENGTH_STRING];
+    char name_file_generate[MAX_LENGTH_STRING];
     struct Node *next;
 } typedef Node;
 

@@ -4,6 +4,7 @@
 #include <dirent.h>
 #include <string.h>
 #include "stenography.h"
+#include "implementationThread.h"
 
 void help() {
     printf("Type 1) currentPath:\tShow the path of current directory.\n"
@@ -50,44 +51,47 @@ int changeDirectory() {
     return chdir(path);
 }
 
-int executeHiding(Node *list) {
+void executeHiding(Node *list) {
+    if(list == NULL)
+        return;
 //    FILE *file_txt;
 //    FILE *file_output;
 //    FILE *file_img = fopen(getNameFileBmp(list), "rb");
     char *file_txt = getNameFileTxt(list);
     char *file_img = getNameFileBmp(list);
+
+    char *file_output;
     {
-        char *file_output;
-        {
-            /*
-            //Controllo i nomi dei file
-            if (file_img == NULL) {
-                printf("The image input file is not present in the current directory.\n");
-                return 1;
-            }
-        //    if (getNameFileTxt(list) == NULL)
-        //        file_txt = stdin;
-        //    else
-        //        file_txt = fopen(getNameFileTxt(list), "rb");
-            if(file_txt == NULL)
-        //
-        //    int length_of_output = lengthFileCheck(file_img, file_txt);
-        //    fseek(file_txt, 0, SEEK_SET);
-        //    fseek(file_img, 0, SEEK_SET);
-        //
-        //    if (length_of_output == -1)
-        //        return 1;
-        //
-             */
-            //removeElement(list);
+        /*
+        //Controllo i nomi dei file
+        if (file_img == NULL) {
+            printf("The image input file is not present in the current directory.\n");
+            return 1;
         }
-        //Creo la stringa, ovvero il nome del file di output.
-        //Avrà lo stesso nome del file txt, modifico la stringa sostituendo l'estensione del file.
-        char name_file_output[MAX_PATH];
-        strcpy(name_file_output, getNameFileTxt(list));
-        name_file_output[strlen(getNameFileTxt(list)) - 4] = '\0';
-        strcat(name_file_output, ".bmp");
-        //file_output = fopen(name_file_output, "wb");
+    //    if (getNameFileTxt(list) == NULL)
+    //        file_txt = stdin;
+    //    else
+    //        file_txt = fopen(getNameFileTxt(list), "rb");
+        if(file_txt == NULL)
+    //
+    //    int length_of_output = lengthFileCheck(file_img, file_txt);
+    //    fseek(file_txt, 0, SEEK_SET);
+    //    fseek(file_img, 0, SEEK_SET);
+    //
+    //    if (length_of_output == -1)
+    //        return 1;
+    //
+         */
+        //removeElement(list);
+    }
+    //Creo la stringa, ovvero il nome del file di output.
+    //Avrà lo stesso nome del file txt, modifico la stringa sostituendo l'estensione del file.
+    char name_file_output[MAX_LENGTH_STRING];
+    strcpy(name_file_output, getNameFileTxt(list));
+    name_file_output[strlen(getNameFileTxt(list)) - 4] = '\0';
+    strcat(name_file_output, ".bmp");
+    //file_output = fopen(name_file_output, "wb");
+    strcpy(list->name_file_generate, name_file_output);
 /*
     //Creo una copia byte a byte dell'immagine originale
     for (int index = 0; index < length_of_output; index++) {
@@ -96,10 +100,13 @@ int executeHiding(Node *list) {
         fwrite(&B, 1, sizeof(byte), file_output);
     }
 */
-        hiding(file_img, file_txt, name_file_output);
-        return 0;
-    }
+    createThread(list);
+    //hiding(list);
+
+    executeHiding (removeElement(list));
+    //return 0;
 }
+
 
 int executeUnveiling(Node *list) {
     {

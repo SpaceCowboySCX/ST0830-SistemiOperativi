@@ -44,7 +44,7 @@ void printTXT(char *name_file);
  * @return  0 - success
  *          1 - fail
  */
-int executeHiding(Node *list);
+void executeHiding(Node *list);
 
 /**
  * This method read file and execute the algorithm for unveiling.
