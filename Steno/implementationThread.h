@@ -12,5 +12,5 @@ void createThreadHiding(void* list);
  *                     pass an pointer.
  */
 void createThreadUnveiling(void* list);
-
+void reset();
 #endif //ST0830_O_S_PROJECT_IMPLEMENTATIONTHREAD_H
